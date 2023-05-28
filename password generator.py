@@ -1,28 +1,26 @@
-import random
+import random,string   #imported string library to replace the lists
 
-
-letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+','@','^','-','_','=']
+# Removed The Lists containing the letters, digits and special symbols
 
 print("Welcome to the Password Generator!")
-nr_letters= int(input("How many letters would you like in your password?\n"))
-nr_symbols = int(input(f"How many symbols would you like?\n"))
-nr_numbers = int(input(f"How many numbers would you like?\n"))
-password=""
+nr_letters= int(input("\nHow many letters would you like in your password?\n"))
+nr_symbols = int(input("\nHow many symbols would you like?\n"))
+nr_numbers = int(input("\nHow many numbers would you like?\n"))
+
+password=str()  # changed to type casting for clearer picture
+
 for i in range(1,nr_letters+1):
-  random_letter=random.choice(letters)
+  random_letter=random.choice(string.ascii_letters)
   password+=random_letter
+  
 for i in range(1,nr_symbols+1):
-  random_symbol=random.choice(symbols)
+  random_symbol=random.choice(string.punctuation)
   password+=random_symbol
+  
 for i in range(1,nr_numbers+1):
-  random_number=random.choice(numbers)
+  random_number=random.choice(string.digits)
   password+=random_number
-#change the string into list to shuffle
-list=[i for i in password]
-random.shuffle(list)
-#change the list into string for proper result
-result = ''.join(list)
-#using the module string_utils would have been easier!
-print("Your password is :",result)
+
+# Replaced the extra list comprehensions  with random.sample to directly shuffle the password string  
+result = ''.join(random.sample(password, len(password)))
+print("\nYour password is :", result)
